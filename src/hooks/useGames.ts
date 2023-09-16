@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AxiosError} from 'axios';
+import { AxiosError, CanceledError} from 'axios';
 import apiClient from "../services/api-client";
 
 export interface Platform{
@@ -27,24 +27,20 @@ const useGames = () => {
 		const [isLoading, setLoading] = useState(false);
 
 		useEffect(() => {
-				const controler = new AbortController();
-				const fetchGames = async () => {
-						try {
-								setLoading(true);
-								const response= await apiClient.get<RawgGamesResponse>("/games", {signal: controler.signal})
-								setError("");
-								setGames(response.data.results);
-								setLoading(false);
-						} catch (err) {
-								setError((err as AxiosError).message);
-								setLoading(false);
-						}
-				}
-				fetchGames();
-				return () => controler.abort();
-	}, []);
-
+			const controler = new AbortController();
+			setLoading(true);
+			apiClient.get<RawgGamesResponse>("/games", {signal: controler.signal}).then(response =>{
+				setGames(response.data.results);
+				setLoading(false);
+			}).catch (err => {
+				if (err instanceof CanceledError) return ;
+				setError((err as AxiosError).message);
+				setLoading(false);
+			})
+			return () => controler.abort();
+		}, []);
 		return { games, error, isLoading };
-}
+	}
+
 
 export default useGames
