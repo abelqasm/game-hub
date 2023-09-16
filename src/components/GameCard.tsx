@@ -7,7 +7,7 @@ interface Props {
 	game: Game;
 }
 
-const CardGame = ({ game }: Props) => {
+const GameCard = ({ game }: Props) => {
 	return (
 		<Card borderRadius={10} overflow="hidden">
 			<Image src={game.background_image} />
@@ -24,4 +24,4 @@ const CardGame = ({ game }: Props) => {
 	);
 };
 
-export default CardGame;
+export default GameCard;

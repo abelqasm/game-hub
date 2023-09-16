@@ -24,23 +24,27 @@ interface RawgGamesResponse {
 const useGames = () => {
 		const [games, setGames] = useState<Game[]>([]);
 		const [error, setError] = useState("");
+		const [isLoading, setLoading] = useState(false);
 
 		useEffect(() => {
 				const controler = new AbortController();
 				const fetchGames = async () => {
 						try {
+								setLoading(true);
 								const response= await apiClient.get<RawgGamesResponse>("/games", {signal: controler.signal})
 								setError("");
 								setGames(response.data.results);
+								setLoading(false);
 						} catch (err) {
 								setError((err as AxiosError).message);
+								setLoading(false);
 						}
 				}
 				fetchGames();
 				return () => controler.abort();
 	}, []);
 
-		return { games, error };
+		return { games, error, isLoading };
 }
 
 export default useGames
