@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { AxiosError} from 'axios';
 import apiClient from "../services/api-client";
 
-interface Game {
+export interface Game {
 	id: number;
 	name: string;
+	background_image: string;
 }
 
 interface RawgGamesResponse {
