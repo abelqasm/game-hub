@@ -14,12 +14,12 @@ const FetchGames = () => {
 			<SimpleGrid columns={{ sm: 1, md: 3, lg: 5 }} padding={10} spacing={3}>
 				{isLoading &&
 					skeletons.map((skeleton) => (
-						<GameCardContainer>
+						<GameCardContainer key={skeleton}>
 							<GameCardSkeleton key={skeleton} />
 						</GameCardContainer>
 					))}
 				{data.map((game) => (
-					<GameCardContainer>
+					<GameCardContainer key={game.id}>
 						<GameCard key={game.id} game={game}></GameCard>
 					</GameCardContainer>
 				))}
