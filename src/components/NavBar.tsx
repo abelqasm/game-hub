@@ -3,11 +3,15 @@ import logo from "../assets/rawg-logo.webp";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchBar from "./SearchBar";
 
-const NavBar = () => {
+interface Props {
+	onSearch: (serachText: string) => void;
+}
+
+const NavBar = ({ onSearch }: Props) => {
 	return (
 		<HStack padding="10px">
 			<Image src={logo} />
-			<SearchBar />
+			<SearchBar onSearch={onSearch} />
 			<ColorModeSwitch />
 		</HStack>
 	);
