@@ -9,15 +9,13 @@ import {
 } from '@chakra-ui/react';
 import useGenres from '../hooks/useGenres';
 import getCropedUrl from '../services/crop-image-url';
+import useGameQueryStore from '../store';
 
-interface Props {
-	onSelectGenre: (genre: number) => void;
-	selectedGenre?: number;
-}
-
-const GenresList = ({ onSelectGenre, selectedGenre }: Props) => {
+const GenresList = () => {
 	const { data: genres, isLoading, error } = useGenres();
-	if (isLoading) return <Spinner />; 
+	const gameQuery = useGameQueryStore((s) => s.gameQuery);
+	const setGenreId = useGameQueryStore((s) => s.setGenreId);
+	if (isLoading) return <Spinner />;
 	if (error) return null;
 	return (
 		<>
@@ -37,8 +35,8 @@ const GenresList = ({ onSelectGenre, selectedGenre }: Props) => {
 							<Button
 								whiteSpace="normal"
 								textAlign="left"
-								onClick={() => onSelectGenre(genre.id)}
-								fontWeight={genre.id === selectedGenre ? 'bold' : 'normal'}
+								onClick={() => setGenreId(genre.id)}
+								fontWeight={genre.id === gameQuery.genreId ? 'bold' : 'normal'}
 								variant="link"
 								fontSize="lg"
 							>
