@@ -11,7 +11,7 @@ const GameGrid = () => {
 	const gameQuery = useGameQueryStore((s) => s.gameQuery);
 	const { data, error, isLoading, fetchNextPage, hasNextPage } =
 		useGames(gameQuery);
-	const skeletons = [1, 2, 3, 4, 5];
+	const skeletons = [1, 2, 3, 4, 5, 6];
 
 	if (error) return <Text>{error.message}</Text>;
 
@@ -26,7 +26,7 @@ const GameGrid = () => {
 				loader={<h4>Loading...</h4>}
 			>
 				<SimpleGrid
-					columns={{ sm: 1, md: 3, lg: 5 }}
+					columns={{ sm: 1, md: 3, lg: 6 }}
 					padding="10px"
 					spacing={5}
 				>
