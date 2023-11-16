@@ -7,7 +7,7 @@ const NavBar = () => {
 	return (
 		<HStack padding="10px">
 			<Link to="/">
-				<Image src='/game-hub-logo.svg' boxSize="40px" borderRadius={8} objectFit="cover" />
+				<Image src='/game-hub-logo.svg' boxSize="50px" objectFit="contain" />
 			</Link>
 			<SearchBar />
 			<ColorModeSwitch />
