@@ -21,7 +21,7 @@ const GameDetailPage = () => {
 			spacing={5}
 		>
 			<GridItem>
-				<Heading>{game.name}</Heading>
+				<Heading marginBottom={7}>{game.name}</Heading>
 				<ExpandableText content={game.description_raw} />
 				<GameAtributes game={game} />
 			</GridItem>
